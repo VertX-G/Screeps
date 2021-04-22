@@ -19,7 +19,7 @@ var roleRepairer = {
         if (creep.memory.repairing) {
             const targets = creep.room.find(FIND_STRUCTURES, {
                 //filter: object => object.hits < object.hitsMax
-                filter: function(object){
+                filter: function (object) {
                     return object.structureType !== STRUCTURE_WALL && (object.hits < object.hitsMax);
                 }
             });
@@ -33,7 +33,7 @@ var roleRepairer = {
                 }
             }
             else {
-                creep.moveTo(26,43);
+                creep.moveTo(26, 43);
             }
         }
 

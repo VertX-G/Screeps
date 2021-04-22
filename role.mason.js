@@ -19,7 +19,7 @@ var roleMason = {
         if (creep.memory.repairing) {
             const targets = creep.room.find(FIND_STRUCTURES, {
                 //filter: object => object.hits < object.hitsMax
-                filter: function(object){
+                filter: function (object) {
                     return object.structureType === STRUCTURE_WALL && (object.hits < object.hitsMax);
                 }
             });
@@ -37,13 +37,13 @@ var roleMason = {
             }
             */
 
-            var primaryTargets =_(targets).filter( {hits: targets[0].hits} ).value()
+            var primaryTargets = _(targets).filter({ hits: targets[0].hits }).value();
             var target = creep.pos.findClosestByPath(primaryTargets);
             console.log('Current target: ' + target + ' hits: ' + target.hits);
             if (creep.repair(target) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
+                creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
             }
-            
+
 
             /*
             if (targets.length > 0) {
