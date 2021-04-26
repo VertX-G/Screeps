@@ -76,3 +76,19 @@ module.exports.loop = function () {
         }
     }
 }
+
+/*
+// Add this to keep a list of my rooms in memory
+
+const updateRoomList = function () {
+	const myRooms = [];
+	for (const roomName in Game.rooms) {
+		if (Game.rooms[roomname].controller && Game.rooms[roomname].controller.my) {
+			Memory.myRooms.push(roomName);
+		}
+	}
+	if (myRooms.length) {
+		Memory.myRooms = myRooms;
+	}
+}
+*/
