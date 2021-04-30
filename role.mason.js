@@ -44,7 +44,6 @@ var roleMason = {
                 creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
             }
 
-
             /*
             if (targets.length > 0) {
                 console.log('First target to repair: ' + targets[0]);

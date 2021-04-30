@@ -11,6 +11,7 @@ TODO:
     saving target name in memory
     doing something with target until that thing is done
     only then re-processing to find new target
+• add a console.log that prints the amount of energy required for the next creep to spawn
     
 would be a good idea to put special code bit into any creep role that has WORK and CARRY bits to be able to boost your controller up in case it slips below 1/2 of ticks-to-downgrade for its level (CONTROLLER_DOWNGRADE constant)
 
@@ -36,7 +37,6 @@ module.exports.loop = function () {
             tower.repair(closestDamagedStructure);
         }
         */
-
         var closestHostile = tower.pos.findClosestByRange(FIND_HOSTILE_CREEPS);
         if(closestHostile) {
             tower.attack(closestHostile);
@@ -50,20 +50,38 @@ module.exports.loop = function () {
         }
     }
 
-    // First Stage Creeps
-    spawnNewCreep.run('harvester', 3, [WORK, CARRY, MOVE]);
-    spawnNewCreep.run('builder', 2, [WORK, CARRY, MOVE]);
-    spawnNewCreep.run('repairer', 1, [WORK, CARRY, MOVE]);
-    spawnNewCreep.run('upgrader', 4, [WORK, CARRY, MOVE]);
-    spawnNewCreep.run('mason', 0, [WORK, CARRY, MOVE]);
+    if (Game.time % 5 == 0) {
+        var R1energyCapacity=Game.rooms.W27S55.energyCapacityAvailable;
+        var R1energyAvailable =Game.rooms.W27S55.energyAvailable;
+        console.log("Room 1 energy: "+R1energyAvailable+" out of "+R1energyCapacity+" Max");
+    }
 
-    /* Second Stage Creeps
-    spawnNewCreep.run('harvester', 2, [WORK, WORK, WORK, CARRY, MOVE]);
-    spawnNewCreep.run('builder', 5, [WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
-    spawnNewCreep.run('repairer', 3, [WORK, CARRY, MOVE]);
-    spawnNewCreep.run('upgrader', 6, [WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
-    spawnNewCreep.run('mason', 10, [WORK, CARRY, MOVE, MOVE, MOVE]);
-    */
+    // var checkGroup = _.filter(Game.creeps, (creep) => creep.memory.role == role);
+    if ((_.filter(Game.creeps, (creep) => creep.memory.role == 'harvester')).length < 2 || (_.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader')).length < 1) {
+        spawnNewCreep.run('harvester', 2, [WORK, CARRY, MOVE]);
+        spawnNewCreep.run('upgrader', 1, [WORK, CARRY, MOVE]);
+    }
+    else {
+        // First Stage Creeps
+        spawnNewCreep.run('harvester', 4, [WORK, WORK, CARRY, MOVE]);
+        spawnNewCreep.run('builder', 6, [WORK, WORK, CARRY, MOVE]);
+        spawnNewCreep.run('repairer', 1, [WORK, WORK, CARRY, MOVE]);
+        spawnNewCreep.run('upgrader', 5, [WORK, WORK, CARRY, MOVE]);
+        spawnNewCreep.run('mason', 3, [WORK, WORK, CARRY, MOVE]);
+
+        /* Second Stage Creeps
+        spawnNewCreep.run('harvester', 2, [WORK, WORK, WORK, CARRY, MOVE]);
+        spawnNewCreep.run('builder', 5, [WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
+        spawnNewCreep.run('repairer', 3, [WORK, CARRY, MOVE]);
+        spawnNewCreep.run('upgrader', 6, [WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
+        spawnNewCreep.run('mason', 10, [WORK, CARRY, MOVE, MOVE, MOVE]);
+        */
+    }
+
+    var currentlySpawning = Game.spawns['Spawn1'].spawning;
+    if (currentlySpawning != null && currentlySpawning.remainingTime == currentlySpawning.needTime -1) {
+        console.log('Spawning: ' + Game.spawns['Spawn1'].spawning.name);
+    }
 
     // streamline this with a loop
     for (var name in Game.creeps) {
@@ -107,3 +125,22 @@ const updateRoomList = function () {
 }
 */
 
+/*
+// add this to make spawns show spawning percentage complete and make it show energy status
+
+StructureSpawn.prototype.Notifications =
+    function () {
+        for (let spawnName in Game.spawns) {
+            if(Game.spawns[spawnName].spawning) { 
+                var spawningCreep = Game.creeps[Game.spawns[spawnName].spawning.name];
+                var Percentage = (((Game.spawns[spawnName].spawning.needTime - Game.spawns[spawnName].spawning.remainingTime) / Game.spawns[spawnName].spawning.needTime)*100).toFixed(2);
+                var symbol = '\uD83D\uDEA7';
+                Game.spawns[spawnName].room.visual.text(
+                    symbol + spawningCreep.memory.role + ' ' + Percentage +'%',
+                    Game.spawns[spawnName].pos.x + 1.5, 
+                    Game.spawns[spawnName].pos.y, 
+                    {size:'0.5', align: 'left', opacity: 0.8, 'backgroundColor': '#A3E4D7', color:'black'});
+            }
+        }
+    };
+*/
