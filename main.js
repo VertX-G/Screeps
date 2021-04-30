@@ -41,17 +41,26 @@ module.exports.loop = function () {
     }
 
     for (var name in Memory.creeps) {
-        if (!Game.creeps[name]) {
+        if (!Game.creeps[name] && ) {
             delete Memory.creeps[name];
             console.log('Clearing non-existing creep memory:', name);
         }
     }
 
+    // First Stage Creeps
+    spawnNewCreep.run('harvester', 3, [WORK, CARRY, MOVE]);
+    spawnNewCreep.run('builder', 2, [WORK, CARRY, MOVE]);
+    spawnNewCreep.run('repairer', 1, [WORK, CARRY, MOVE]);
+    spawnNewCreep.run('upgrader', 4, [WORK, CARRY, MOVE]);
+    spawnNewCreep.run('mason', 0, [WORK, CARRY, MOVE]);
+
+    /* Second Stage Creeps
     spawnNewCreep.run('harvester', 2, [WORK, WORK, WORK, CARRY, MOVE]);
     spawnNewCreep.run('builder', 5, [WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
     spawnNewCreep.run('repairer', 3, [WORK, CARRY, MOVE]);
     spawnNewCreep.run('upgrader', 6, [WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
     spawnNewCreep.run('mason', 10, [WORK, CARRY, MOVE, MOVE, MOVE]);
+    */
 
     // streamline this with a loop
     for (var name in Game.creeps) {
