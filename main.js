@@ -11,6 +11,9 @@ TODO:
     saving target name in memory
     doing something with target until that thing is done
     only then re-processing to find new target
+    
+would be a good idea to put special code bit into any creep role that has WORK and CARRY bits to be able to boost your controller up in case it slips below 1/2 of ticks-to-downgrade for its level (CONTROLLER_DOWNGRADE constant)
+
 
 */
 
@@ -85,3 +88,22 @@ module.exports.loop = function () {
         }
     }
 }
+
+/*
+// Add this to keep a list of my rooms in memory
+
+if (Game.time % 100 == 0) { updateRoomList(); }
+
+const updateRoomList = function () {
+	const myRooms = [];
+	for (const roomName in Game.rooms) {
+		if (Game.rooms[roomname].controller && Game.rooms[roomname].controller.my) {
+			Memory.myRooms.push(roomName);
+		}
+	}
+	if (myRooms.length) {
+		Memory.myRooms = myRooms;
+	}
+}
+*/
+
