@@ -1,0 +1,1 @@
+Current Room: SHARD3 / ROOM W27S55
