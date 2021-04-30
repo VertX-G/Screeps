@@ -24,25 +24,32 @@ var roleMason = {
                 }
             });
 
-            targets.sort((a, b) => a.hits - b.hits);
-            /*
-            var primaryTargets = all targets where targets.hits = targets[0].hits;
-            var primaryTargets =_(targets).filter( {hits: target[0].hits} ).value()
-            var target = findClosestByRange(primaryTargets);
-            if (target.length > 0) {
-                console.log('Current target: ' + target[0]);
-                if (creep.repair(target[0]) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target[0], {visualizePathStyle: {stroke: '#ffffff'}});
+            if (targets.length > 0) {
+                targets.sort((a, b) => a.hits - b.hits);
+                /*
+                var primaryTargets = all targets where targets.hits = targets[0].hits;
+                var primaryTargets =_(targets).filter( {hits: target[0].hits} ).value()
+                var target = findClosestByRange(primaryTargets);
+                if (target.length > 0) {
+                    console.log('Current target: ' + target[0]);
+                    if (creep.repair(target[0]) == ERR_NOT_IN_RANGE) {
+                        creep.moveTo(target[0], {visualizePathStyle: {stroke: '#ffffff'}});
+                    }
+                }
+                */
+
+                var primaryTargets = _(targets).filter({ hits: targets[0].hits }).value();
+                var target = creep.pos.findClosestByPath(primaryTargets);
+                console.log('Current target: ' + target + ' hits: ' + target.hits);
+                if (creep.repair(target) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
                 }
             }
-            */
-
-            var primaryTargets = _(targets).filter({ hits: targets[0].hits }).value();
-            var target = creep.pos.findClosestByPath(primaryTargets);
-            console.log('Current target: ' + target + ' hits: ' + target.hits);
-            if (creep.repair(target) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
+            else {
+                creep.moveTo(12, 30);
             }
+
+            
 
             /*
             if (targets.length > 0) {
