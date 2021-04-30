@@ -1,7 +1,9 @@
 module.exports = {
     run(role, count, body) {
         var roleGroup = _.filter(Game.creeps, (creep) => creep.memory.role == role);
-        console.log(role + 's: ' + roleGroup.length);
+        if (Game.time % 100 == 0) {
+            console.log(role + 's: ' + roleGroup.length);
+        }
 
         if (roleGroup.length < count) {
             var newName = role + Game.time;
