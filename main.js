@@ -79,11 +79,11 @@ module.exports.loop = function () {
         spawnNewCreep.run('mason', 3, [WORK, WORK, CARRY, MOVE, MOVE]);
 
         /* Second Stage Creeps
-        spawnNewCreep.run('harvester', 2, [WORK, WORK, WORK, CARRY, MOVE]);
-        spawnNewCreep.run('builder', 5, [WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
-        spawnNewCreep.run('repairer', 3, [WORK, CARRY, MOVE]);
-        spawnNewCreep.run('upgrader', 6, [WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
-        spawnNewCreep.run('mason', 10, [WORK, CARRY, MOVE, MOVE, MOVE]);
+        spawnNewCreep.run('harvester', 3, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
+        spawnNewCreep.run('upgrader', 3, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
+        spawnNewCreep.run('repairer', 1, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
+        spawnNewCreep.run('builder', 3, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
+        spawnNewCreep.run('mason', 2, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
         */
     }
 
