@@ -49,12 +49,21 @@ module.exports.loop = function () {
             console.log('Clearing non-existing creep memory:', name);
         }
     }
-
+    /*
     if (Game.time % 5 == 0) {
         var R1energyCapacity=Game.rooms.W27S55.energyCapacityAvailable;
         var R1energyAvailable =Game.rooms.W27S55.energyAvailable;
         console.log("Room 1 energy: "+R1energyAvailable+" out of "+R1energyCapacity+" Max");
     }
+    */
+
+    Game.spawns['Spawn1'].room.visual.text(
+        // figure out how to make new line
+        //"Energy: "+Game.rooms.W27S55.energyAvailable+" / "+Game.rooms.W27S55.energyCapacityAvailable + '\n' +
+        "Energy: "+Game.rooms.W27S55.energyAvailable+" / "+Game.rooms.W27S55.energyCapacityAvailable + '\n',
+        Game.spawns['Spawn1'].pos.x - 2, 
+        Game.spawns['Spawn1'].pos.y - 4, 
+        {size:'0.5', align: 'left', opacity: 0.8, 'backgroundColor': '#A3E4D7', color:'black'});
 
     // var checkGroup = _.filter(Game.creeps, (creep) => creep.memory.role == role);
     if ((_.filter(Game.creeps, (creep) => creep.memory.role == 'harvester')).length < 2 || (_.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader')).length < 1) {
@@ -105,6 +114,28 @@ module.exports.loop = function () {
             roleMason.run(creep);
         }
     }
+
+    /*
+// add this to make spawns show spawning percentage complete and make it show energy status
+
+    StructureSpawn.prototype.Notifications =
+    function () {
+        for (let spawnName in Game.spawns) {
+
+            if(Game.spawns[spawnName].spawning) { 
+                var spawningCreep = Game.creeps[Game.spawns[spawnName].spawning.name];
+                var Percentage = (((Game.spawns[spawnName].spawning.needTime - Game.spawns[spawnName].spawning.remainingTime) / Game.spawns[spawnName].spawning.needTime)*100).toFixed(2);
+                var symbol = '\uD83D\uDEA7';
+                Game.spawns[spawnName].room.visual.text(
+                    symbol + spawningCreep.memory.role + ' ' + Percentage +'%',
+                    Game.spawns[spawnName].pos.x + 1.5, 
+                    Game.spawns[spawnName].pos.y, 
+                    {size:'0.5', align: 'left', opacity: 0.8, 'backgroundColor': '#A3E4D7', color:'black'});
+            }
+        }
+    };
+    */
+
 }
 
 /*
@@ -125,22 +156,3 @@ const updateRoomList = function () {
 }
 */
 
-/*
-// add this to make spawns show spawning percentage complete and make it show energy status
-
-StructureSpawn.prototype.Notifications =
-    function () {
-        for (let spawnName in Game.spawns) {
-            if(Game.spawns[spawnName].spawning) { 
-                var spawningCreep = Game.creeps[Game.spawns[spawnName].spawning.name];
-                var Percentage = (((Game.spawns[spawnName].spawning.needTime - Game.spawns[spawnName].spawning.remainingTime) / Game.spawns[spawnName].spawning.needTime)*100).toFixed(2);
-                var symbol = '\uD83D\uDEA7';
-                Game.spawns[spawnName].room.visual.text(
-                    symbol + spawningCreep.memory.role + ' ' + Percentage +'%',
-                    Game.spawns[spawnName].pos.x + 1.5, 
-                    Game.spawns[spawnName].pos.y, 
-                    {size:'0.5', align: 'left', opacity: 0.8, 'backgroundColor': '#A3E4D7', color:'black'});
-            }
-        }
-    };
-*/

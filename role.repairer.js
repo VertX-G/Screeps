@@ -28,7 +28,7 @@ var roleRepairer = {
 
             if (targets.length > 0) {
                 if (Game.time % 20 == 0) {
-                    console.log('First target to repair: ' + targets[0]);
+                    console.log('First target to repair: ' + targets[0] + ', hits: ' + targets[0].hits + ' / ' + targets[0].hitsMax);
                 }
                 if (creep.repair(targets[0]) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(targets[0], { visualizePathStyle: { stroke: 'blue' } });
