@@ -72,19 +72,21 @@ module.exports.loop = function () {
     }
     else {
         // First Stage Creeps
+        /*
         spawnNewCreep.run('harvester', 5, [WORK, CARRY, MOVE, MOVE]);
         spawnNewCreep.run('upgrader', 5, [WORK, WORK, CARRY, MOVE]);
         spawnNewCreep.run('repairer', 1, [WORK, CARRY, MOVE, MOVE]);
         spawnNewCreep.run('builder', 6, [WORK, WORK, CARRY, MOVE, MOVE]);
         spawnNewCreep.run('mason', 3, [WORK, WORK, CARRY, MOVE, MOVE]);
+        */
 
-        /* Second Stage Creeps
+        // Second Stage Creeps
         spawnNewCreep.run('harvester', 3, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
         spawnNewCreep.run('upgrader', 3, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
         spawnNewCreep.run('repairer', 1, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
         spawnNewCreep.run('builder', 3, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
         spawnNewCreep.run('mason', 2, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
-        */
+        
     }
 
     var currentlySpawning = Game.spawns['Spawn1'].spawning;
