@@ -63,7 +63,7 @@ module.exports.loop = function () {
     }
     else {
         // First Stage Creeps
-        spawnNewCreep.run('harvester', 4, [WORK, CARRY, MOVE, MOVE]);
+        spawnNewCreep.run('harvester', 5, [WORK, CARRY, MOVE, MOVE]);
         spawnNewCreep.run('upgrader', 5, [WORK, WORK, CARRY, MOVE]);
         spawnNewCreep.run('repairer', 1, [WORK, CARRY, MOVE, MOVE]);
         spawnNewCreep.run('builder', 6, [WORK, WORK, CARRY, MOVE, MOVE]);
