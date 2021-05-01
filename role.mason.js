@@ -40,7 +40,10 @@ var roleMason = {
 
                 var primaryTargets = _(targets).filter({ hits: targets[0].hits }).value();
                 var target = creep.pos.findClosestByPath(primaryTargets);
-                console.log('Current target: ' + target + ' hits: ' + target.hits);
+                if (Game.time % 20 == 0) {
+                    console.log('Current target: ' + target + ' hits: ' + target.hits);
+                }
+                
                 if (creep.repair(target) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target, { visualizePathStyle: { stroke: '#ffffff' } });
                 }
@@ -63,8 +66,9 @@ var roleMason = {
 
         else {
             var sources = creep.room.find(FIND_SOURCES);
-            if (creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[1], { visualizePathStyle: { stroke: '#ffaa00' } });
+            var targetSource = creep.pos.findClosestByPath(sources);
+            if (creep.harvest(targetSource) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(targetSource, { visualizePathStyle: { stroke: '#ffaa00' } });
             }
         }
 
