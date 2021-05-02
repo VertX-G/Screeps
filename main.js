@@ -23,6 +23,7 @@ var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleRepairer = require('role.repairer');
 var roleMason = require('role.mason');
+var roleArtillery = require('role.artillery');
 var spawnNewCreep = require('action.spawnCreep');
 
 module.exports.loop = function () {
@@ -65,8 +66,17 @@ module.exports.loop = function () {
         Game.spawns['Spawn1'].pos.y - 4, 
         {size:'0.5', align: 'left', opacity: 0.8, 'backgroundColor': '#A3E4D7', color:'black'});
 
+    /*
+    to implement some kind of priority system when spawning creeps:
+    make a list of dictionaries
+    loop through list (for each i in list)
+    if currentCount < requiredCount, make creep and break from loop
+    */
+    
+
     // var checkGroup = _.filter(Game.creeps, (creep) => creep.memory.role == role);
     if ((_.filter(Game.creeps, (creep) => creep.memory.role == 'harvester')).length < 2 || (_.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader')).length < 1) {
+        console.log('*** EMERGENCY SPAWN REQUIRED ***');
         spawnNewCreep.run('harvester', 2, [WORK, CARRY, MOVE]);
         spawnNewCreep.run('upgrader', 1, [WORK, CARRY, MOVE]);
     }
@@ -81,12 +91,12 @@ module.exports.loop = function () {
         */
 
         // Second Stage Creeps
-        spawnNewCreep.run('harvester', 3, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
-        spawnNewCreep.run('upgrader', 3, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
+        spawnNewCreep.run('harvester', 4, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
+        spawnNewCreep.run('upgrader', 4, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
         spawnNewCreep.run('repairer', 1, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
         spawnNewCreep.run('builder', 3, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
         spawnNewCreep.run('mason', 2, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
-        
+        spawnNewCreep.run('artillery', 1, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
     }
 
     var currentlySpawning = Game.spawns['Spawn1'].spawning;
@@ -114,6 +124,10 @@ module.exports.loop = function () {
 
         if (creep.memory.role == 'mason') {
             roleMason.run(creep);
+        }
+
+        if (creep.memory.role == 'artillery') {
+            roleArtillery.run(creep);
         }
     }
 
