@@ -5,15 +5,15 @@ var roleMason = {
 
         if (creep.memory.repairing && creep.carry.energy == 0) {
             creep.memory.repairing = false;
-            creep.say('🔄 M: Hrv');
+            creep.say('⚡ M: Hrv');
         }
         else if (!creep.memory.repairing && creep.carry.energy < creep.carryCapacity) {
             creep.memory.repairing = false;
-            creep.say('🔄 M: Hrv');
+            creep.say('⚡ M: Hrv');
         }
         else if (!creep.memory.repairing && creep.carry.energy == creep.carryCapacity) {
             creep.memory.repairing = true;
-            creep.say('🚧 repair');
+            creep.say('🧱 M: Fortify');
         }
 
         if (creep.memory.repairing) {

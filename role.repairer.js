@@ -5,15 +5,15 @@ var roleRepairer = {
 
         if (creep.memory.repairing && creep.carry.energy == 0) {
             creep.memory.repairing = false;
-            creep.say('🔄 R: Hrv');
+            creep.say('⚡ R: Hrv');
         }
         else if (!creep.memory.repairing && creep.carry.energy < creep.carryCapacity) {
             creep.memory.repairing = false;
-            creep.say('🔄 R: Hrv');
+            creep.say('⚡ R: Hrv');
         }
         else if (!creep.memory.repairing && creep.carry.energy == creep.carryCapacity) {
             creep.memory.repairing = true;
-            creep.say('🚧 repair');
+            creep.say('🛠️ R: Repair');
         }
 
         if (creep.memory.repairing) {

@@ -15,7 +15,16 @@ TODO:
     
 would be a good idea to put special code bit into any creep role that has WORK and CARRY bits to be able to boost your controller up in case it slips below 1/2 of ticks-to-downgrade for its level (CONTROLLER_DOWNGRADE constant)
 
+*/
 
+/*
+Creep say things:\
+creep.say('⚡ X: Hrv');
+creep.say('🔧 U: Upgrade');
+creep.say('🛠️ R: Repair');
+creep.say('🔄 X: Transfer');
+creep.say('🚧 B: Build');
+creep.say('🧱 M: Fortify');
 */
 
 var roleHarvester = require('role.harvester');
@@ -80,6 +89,9 @@ module.exports.loop = function () {
         spawnNewCreep.run('harvester', 2, [WORK, CARRY, MOVE]);
         spawnNewCreep.run('upgrader', 1, [WORK, CARRY, MOVE]);
     }
+    else if ((_.filter(Game.creeps, (creep) => creep.memory.role == 'harvester')).length < 4) {
+        spawnNewCreep.run('harvester', 4, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
+    }
     else {
         // First Stage Creeps
         /*
@@ -91,12 +103,13 @@ module.exports.loop = function () {
         */
 
         // Second Stage Creeps
-        spawnNewCreep.run('harvester', 4, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
-        spawnNewCreep.run('upgrader', 4, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
-        spawnNewCreep.run('repairer', 1, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
-        spawnNewCreep.run('builder', 3, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
-        spawnNewCreep.run('mason', 2, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
+        // in reverse order of importance because last one called will be spawned
         spawnNewCreep.run('artillery', 1, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
+        spawnNewCreep.run('mason', 2, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
+        spawnNewCreep.run('builder', 3, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
+        spawnNewCreep.run('repairer', 1, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
+        spawnNewCreep.run('upgrader', 4, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
+        spawnNewCreep.run('harvester', 4, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
     }
 
     var currentlySpawning = Game.spawns['Spawn1'].spawning;

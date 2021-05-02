@@ -7,7 +7,9 @@ module.exports = {
 
         if (roleGroup.length < count) {
             var newName = role + Game.time;
-            Game.spawns['Spawn1'].spawnCreep(body, newName, { memory: { role: role } });
+            if (Game.spawns['Spawn1'].spawnCreep(body, newName, { memory: { role: role } }) == 0) {
+                //console.log('Spawning: ' + newName);
+            }
             
         }
         
