@@ -107,7 +107,7 @@ module.exports.loop = function () {
         spawnNewCreep.run('artillery', 1, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
         spawnNewCreep.run('mason', 2, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
         spawnNewCreep.run('builder', 3, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
-        spawnNewCreep.run('repairer', 1, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
+        spawnNewCreep.run('repairer', 2, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
         spawnNewCreep.run('upgrader', 4, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
         spawnNewCreep.run('harvester', 4, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
     }
