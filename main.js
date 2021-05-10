@@ -57,8 +57,6 @@ module.exports.loop = function () {
         if(closestHostile) {
             tower.attack(closestHostile);
         }
-        console.log(towers);
-        console.log(closestHostile);
     }
 
     for (var name in Memory.creeps) {
