@@ -1,4 +1,5 @@
 /*
+
 TODO:
 • simplify role.mason sorts and filters
 • figure out how to use containers
@@ -35,9 +36,15 @@ var roleArtillery = require('role.artillery');
 var spawnNewCreep = require('action.spawnCreep');
 
 module.exports.loop = function () {
-
-    var tower = Game.getObjectById('TOWER_ID');
-    if(tower) {
+    
+    
+    
+    
+    var towers = Game.rooms["W27S55"].find(FIND_STRUCTURES, {
+        filter: (s) => s.structureType === STRUCTURE_TOWER
+    });
+    
+    for (var tower of towers) {
         /*
         var closestDamagedStructure = tower.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: (structure) => structure.hits < structure.hitsMax
@@ -50,6 +57,8 @@ module.exports.loop = function () {
         if(closestHostile) {
             tower.attack(closestHostile);
         }
+        console.log(towers);
+        console.log(closestHostile);
     }
 
     for (var name in Memory.creeps) {
