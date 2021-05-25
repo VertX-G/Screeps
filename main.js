@@ -107,8 +107,8 @@ module.exports.loop = function () {
         spawnNewCreep.run('builder', 6, [WORK, WORK, CARRY, MOVE, MOVE]);
         spawnNewCreep.run('mason', 3, [WORK, WORK, CARRY, MOVE, MOVE]);
         */
-
-                /*
+        
+        /*
         // Second Stage Creeps
         // in reverse order of importance because last one called will be spawned
         spawnNewCreep.run('artillery', 1, [WORK, WORK, WORK, CARRY, CARRY, MOVE, MOVE]);
@@ -142,7 +142,6 @@ module.exports.loop = function () {
     TOUGH	        10	    No effect other than the 100 hit points all body parts add. This provides a cheap way to add hit points to a creep.
     CLAIM	        600	
     */
-    
 
     var currentlySpawning = Game.spawns['Spawn1'].spawning;
     if (currentlySpawning != null && currentlySpawning.remainingTime == currentlySpawning.needTime -1) {
